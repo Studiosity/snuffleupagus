@@ -19,6 +19,6 @@ snuffy.create_token
 ### Token validation
 ```ruby
 snuffy = Snuffleupagus::AuthToken.new('p4ssw0rd')
-snuffy.validate_token("53616c7465645f5f25dba4d4a97b238c4560ab46ffdfb77b28ad3e7121ab1917")
+snuffy.check_token("53616c7465645f5f25dba4d4a97b238c4560ab46ffdfb77b28ad3e7121ab1917")
 #=> true
 ```
