@@ -2,7 +2,9 @@ Snuffleupagus
 =============
 
 A little simple.. auth token generator
+
 Handles basic time-limited authentication token creation / validation
+
 Uses Gibberish::AES with 256 bit CBC encryption
 
 ![Snuffy](/Snuffy.png "Snuffleupagus")
