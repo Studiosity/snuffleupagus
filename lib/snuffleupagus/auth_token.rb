@@ -19,8 +19,8 @@ module Snuffleupagus
   #
   class AuthToken
 
-    # tokens are only valid for 20 seconds
-    MAX_VALID_TIME_DIFFERENCE = 20
+    # tokens are only valid for 2 minutes
+    MAX_VALID_TIME_DIFFERENCE = 120
 
     def initialize(key)
       @key = key
