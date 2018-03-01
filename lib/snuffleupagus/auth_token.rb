@@ -24,16 +24,17 @@ module Snuffleupagus
 
     def initialize(key)
       @key = key
+      @cipher = OpenSSL::Cipher::AES256.new :CBC
     end
 
     def create_token
-      encode cipher.enc("#{constant}#{Time.now.to_i}", binary: true)
+      encode encrypt "#{CONSTANT}#{Time.now.to_i}"
     end
 
     def check_token(token)
       return false unless token && token.is_a?(String)
-      decoded = cipher.dec(decode(token), binary: true)
-      match = /^#{constant}([0-9]+)$/.match decoded
+      decoded = decrypt decode token
+      match = /^#{CONSTANT}([0-9]+)$/.match decoded
       return false unless match
       (match[1].to_i - Time.now.to_i).abs < MAX_VALID_TIME_DIFFERENCE
     rescue
@@ -42,12 +43,32 @@ module Snuffleupagus
 
     private
 
-    def cipher
-      Gibberish::AES.new(@key, 256, 'cbc')
+    CONSTANT = 'date:'.freeze
+
+    attr_reader :cipher
+
+    def encrypt(data)
+      salt = generate_salt
+      setup_cipher(:encrypt, salt)
+      e = cipher.update(data) + cipher.final
+      "Salted__#{salt}#{e}" #OpenSSL compatible
     end
 
-    def constant
-      'date:'
+    def decrypt(data)
+      raise ArgumentError, 'Data is too short' unless data.length >= 16
+      salt = data[8..15]
+      data = data[16..-1]
+      setup_cipher(:decrypt, salt)
+      cipher.update(data) + cipher.final
+    end
+
+    def setup_cipher(method, salt)
+      cipher.send(method)
+      cipher.pkcs5_keyivgen(@key, salt, 1)
+    end
+
+    def generate_salt
+      8.times.map { rand(255).chr }.join
     end
 
     def encode(data)

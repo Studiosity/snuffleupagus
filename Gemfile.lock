@@ -1,17 +1,19 @@
 PATH
   remote: .
   specs:
-    snuffleupagus (0.0.1)
-      gibberish (~> 1.4.0)
+    snuffleupagus (0.0.3)
 
 GEM
   remote: http://rubygems.org/
   specs:
-    gibberish (1.4.0)
+    timecop (0.4.4)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  gibberish
   snuffleupagus!
+  timecop
+
+BUNDLED WITH
+   1.16.1
