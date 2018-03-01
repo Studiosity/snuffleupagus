@@ -14,7 +14,7 @@ Uses Gibberish::AES with 256 bit CBC encryption
 Include it in your Gemfile:
 
 ```ruby
-gem 'snuffleupagus', :git => 'git@github.com:TutoringAustralasia/snuffleupagus.git'
+gem 'snuffleupagus'
 ```
 
 ## Basic Usage
