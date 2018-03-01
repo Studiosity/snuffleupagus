@@ -11,9 +11,9 @@ Gem::Specification.new do |s|
   s.summary                   = "snuffleupagus-#{s.version}"
   s.required_rubygems_version = '> 1.3.6'
 
-  s.add_development_dependency 'rspec'
-  s.add_development_dependency 'rubocop'
-  s.add_development_dependency 'timecop'
+  s.add_development_dependency 'rspec', '~> 0'
+  s.add_development_dependency 'rubocop', '~> 0'
+  s.add_development_dependency 'timecop', '~> 0'
 
   s.files = `git ls-files`.split($OUTPUT_RECORD_SEPARATOR)
   s.executables = `git ls-files`.split("\n").map do |f|
