@@ -9,7 +9,7 @@ describe Snuffleupagus::AuthToken do
 
     it { is_expected.to be_a String }
     it { expect(subject.length).to eq 64 }
-    it { is_expected.to match /\A[a-f0-9]{64}\z/ }
+    it { is_expected.to match(/\A[a-f0-9]{64}\z/) }
   end
 
   describe '#check_token' do

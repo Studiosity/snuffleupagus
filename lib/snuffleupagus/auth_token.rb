@@ -1,7 +1,7 @@
 module Snuffleupagus
-  #    Handles basic time-limited authentication token creation / validation
+  # Handles basic time-limited authentication token creation / validation
   #
-  #    Uses Gibberish::AES with 256 bit CBC encryption
+  # Uses OpenSSL AES with 256 bit CBC encryption
   #
   # ## Basic Usage
   #
@@ -18,10 +18,6 @@ module Snuffleupagus
   #     #=> true
   #
   class AuthToken
-
-    # tokens are only valid for 2 minutes
-    MAX_VALID_TIME_DIFFERENCE = 120
-
     def initialize(key)
       @key = key
       @cipher = OpenSSL::Cipher::AES256.new :CBC
@@ -37,13 +33,14 @@ module Snuffleupagus
       match = /^#{CONSTANT}([0-9]+)$/.match decoded
       return false unless match
       (match[1].to_i - Time.now.to_i).abs < MAX_VALID_TIME_DIFFERENCE
-    rescue
+    rescue StandardError
       false
     end
 
     private
 
     CONSTANT = 'date:'.freeze
+    MAX_VALID_TIME_DIFFERENCE = 120 # tokens are only valid for 2 minutes
 
     attr_reader :cipher
 
@@ -51,7 +48,7 @@ module Snuffleupagus
       salt = generate_salt
       setup_cipher(:encrypt, salt)
       e = cipher.update(data) + cipher.final
-      "Salted__#{salt}#{e}" #OpenSSL compatible
+      "Salted__#{salt}#{e}" # OpenSSL compatible
     end
 
     def decrypt(data)
@@ -68,7 +65,7 @@ module Snuffleupagus
     end
 
     def generate_salt
-      8.times.map { rand(255).chr }.join
+      Array.new(8) { rand(255).chr }.join
     end
 
     def encode(data)
