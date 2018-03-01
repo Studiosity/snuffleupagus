@@ -12,3 +12,4 @@ install:
 
 script:
   - bundle exec rubocop
+  - bundle exec rake
