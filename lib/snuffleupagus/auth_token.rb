@@ -1,3 +1,5 @@
+require 'openssl'
+
 module Snuffleupagus
   # Handles basic time-limited authentication token creation / validation
   #
