@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.platform                  = Gem::Platform::RUBY
   s.authors                   = ['Andrew Bromwich']
   s.email                     = ['abromwich@studiosity.com']
-  s.homepage                  = 'https://studiosity.com'
+  s.homepage                  = 'https://github.com/Studiosity/snuffleupagus'
   s.description               = 'Simple auth token generator/validator'
   s.summary                   = "snuffleupagus-#{s.version}"
   s.required_rubygems_version = '> 1.3.6'
