@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'openssl'
 
 module Snuffleupagus
@@ -30,10 +32,12 @@ module Snuffleupagus
     end
 
     def check_token(token)
-      return false unless token && token.is_a?(String)
+      return false unless token&.is_a?(String)
+
       decoded = decrypt decode token
       match = /^#{CONSTANT}([0-9]+)$/.match decoded
       return false unless match
+
       (match[1].to_i - Time.now.to_i).abs < MAX_VALID_TIME_DIFFERENCE
     rescue StandardError
       false
@@ -41,7 +45,7 @@ module Snuffleupagus
 
     private
 
-    CONSTANT = 'date:'.freeze
+    CONSTANT = 'date:'
     MAX_VALID_TIME_DIFFERENCE = 120 # tokens are only valid for 2 minutes
 
     attr_reader :cipher
@@ -55,6 +59,7 @@ module Snuffleupagus
 
     def decrypt(data)
       raise ArgumentError, 'Data is too short' unless data.length >= 16
+
       salt = data[8..15]
       data = data[16..-1]
       setup_cipher(:decrypt, salt)
