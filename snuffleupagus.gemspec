@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.summary                   = "snuffleupagus-#{s.version}"
   s.required_rubygems_version = '> 1.3.6'
 
-  s.add_development_dependency 'rake', '~> 12.3', '>= 12.3.3'
+  s.add_development_dependency 'rake', '>= 12.3.3', '~> 13.0'
   s.add_development_dependency 'rspec', '~> 3'
   s.add_development_dependency 'rubocop', '~> 0.49'
   s.add_development_dependency 'timecop', '~> 0'
