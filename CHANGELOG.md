@@ -3,6 +3,10 @@
 ## Unreleased
 - none
 
+## [0.1.1](releases/tag/v0.1.1) - 2020-10-21
+### Added
+- Add context to the create/check token to avoid replay in different contexts
+
 ## [0.0.9](releases/tag/v0.0.9) - 2020-03-01
 ### Fixed
 - Address CVE-2020-8130 - rake OS command injection vulnerability

@@ -24,18 +24,18 @@ module Snuffleupagus
   class AuthToken
     def initialize(key)
       @key = key
-      @cipher = OpenSSL::Cipher::AES256.new :CBC
+      @cipher = OpenSSL::Cipher.new('aes-256-cbc')
     end
 
-    def create_token
-      encode encrypt "#{CONSTANT}#{Time.now.to_i}"
+    def create_token(context)
+      encode encrypt "#{CONSTANT}#{context}#{Time.now.to_i}"
     end
 
-    def check_token(token)
-      return false unless token&.is_a?(String)
+    def token_valid?(token, context)
+      return false unless token.is_a? String
 
       decoded = decrypt decode token
-      match = /^#{CONSTANT}([0-9]+)$/.match decoded
+      match = /\A#{CONSTANT}#{Regexp.escape(context)}([0-9]+)\z/.match decoded
       return false unless match
 
       (match[1].to_i - Time.now.to_i).abs < MAX_VALID_TIME_DIFFERENCE
