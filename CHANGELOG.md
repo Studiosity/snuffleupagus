@@ -4,6 +4,10 @@
 - none
 
 ## [0.1.1](releases/tag/v0.1.1) - 2020-10-21
+### Updated
+- Use named parameters when creating and validating tokens
+
+## [0.1.1](releases/tag/v0.1.1) - 2020-10-21
 ### Added
 - Add context to the create/check token to avoid replay in different contexts
 

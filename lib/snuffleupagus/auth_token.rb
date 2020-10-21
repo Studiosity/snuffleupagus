@@ -27,11 +27,11 @@ module Snuffleupagus
       @cipher = OpenSSL::Cipher.new('aes-256-cbc')
     end
 
-    def create_token(context)
+    def create_token(context:)
       encode encrypt "#{CONSTANT}#{context}#{Time.now.to_i}"
     end
 
-    def token_valid?(token, context)
+    def token_valid?(token:, context:)
       return false unless token.is_a? String
 
       decoded = decrypt decode token

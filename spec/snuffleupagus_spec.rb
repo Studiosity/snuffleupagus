@@ -7,7 +7,7 @@ describe Snuffleupagus::AuthToken do
   let(:snuffy) { Snuffleupagus::AuthToken.new('sup3r4w3s0m3p4ssw0rd') }
 
   describe '#create_token' do
-    subject { snuffy.create_token 'my-context' }
+    subject { snuffy.create_token context: 'my-context' }
 
     it { is_expected.to be_a String }
     it { expect(subject.length).to eq 96 }
@@ -15,16 +15,16 @@ describe Snuffleupagus::AuthToken do
   end
 
   describe '#token_valid?' do
-    subject { snuffy.token_valid?(token, 'my-context') }
+    subject { snuffy.token_valid?(token: token, context: 'my-context') }
 
     context 'with a valid token' do
-      let(:token) { snuffy.create_token 'my-context' }
+      let(:token) { snuffy.create_token context: 'my-context' }
 
       it { is_expected.to be_truthy }
     end
 
     context 'when the context doesnt match' do
-      let(:token) { snuffy.create_token 'another-context' }
+      let(:token) { snuffy.create_token context: 'another-context' }
 
       it { is_expected.to be_falsey }
     end
@@ -48,7 +48,7 @@ describe Snuffleupagus::AuthToken do
     end
 
     context 'testing expired tokens' do
-      let(:token) { snuffy.create_token 'my-context' }
+      let(:token) { snuffy.create_token context: 'my-context' }
 
       before { token } # pre-load the token
       after { Timecop.return }
