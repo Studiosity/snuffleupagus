@@ -61,7 +61,7 @@ module Snuffleupagus
       raise ArgumentError, 'Data is too short' unless data.length >= 16
 
       salt = data[8..15]
-      data = data[16..-1]
+      data = data[16..]
       setup_cipher(:decrypt, salt)
       cipher.update(data) + cipher.final
     end
