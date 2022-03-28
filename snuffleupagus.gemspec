@@ -12,11 +12,20 @@ Gem::Specification.new do |s|
   s.description               = 'Simple auth token generator/validator'
   s.summary                   = "snuffleupagus-#{s.version}"
   s.required_rubygems_version = '> 1.3.6'
-  s.required_ruby_version     = ['>= 2.5.0', '< 3.1.0']
+  s.required_ruby_version     = ['>= 2.6.0', '< 3.2.0']
+
+  # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
+  # delete this section to allow pushing this gem to any host.
+  raise 'RubyGems 2.0 or newer is required to protect against public gem pushes.' unless s.respond_to?(:metadata)
+
+  s.metadata['allowed_push_host'] = 'https://rubygems.org'
+  s.metadata['rubygems_mfa_required'] = 'true'
 
   s.add_development_dependency 'rake', '~> 12.3', '>= 12.3.3'
   s.add_development_dependency 'rspec', '~> 3'
-  s.add_development_dependency 'rubocop', '~> 0.49'
+  s.add_development_dependency 'rubocop', '~> 1.26'
+  s.add_development_dependency 'rubocop-rake', '~> 0.6'
+  s.add_development_dependency 'rubocop-rspec', '~> 2.9'
   s.add_development_dependency 'timecop', '~> 0'
 
   s.files = `git ls-files`.split($OUTPUT_RECORD_SEPARATOR)
