@@ -3,6 +3,16 @@
 ## Unreleased
 - none
 
+## [0.3.1](releases/tag/v0.3.1) - 2022-08-19
+### Added
+- Add support for Ruby 3.1 (#3)
+### Updated
+- Use Github actions in favour of Travis CI (#3)
+
+## [0.2.2](releases/tag/v0.2.2) - 2021-12-22
+### Added
+- Add support for Ruby 3.0 (#2)
+
 ## [0.1.1](releases/tag/v0.1.1) - 2020-10-21
 ### Updated
 - Use named parameters when creating and validating tokens
