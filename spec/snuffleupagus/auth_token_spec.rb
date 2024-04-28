@@ -4,18 +4,18 @@ require './lib/snuffleupagus'
 require 'timecop'
 
 describe Snuffleupagus::AuthToken do
-  let(:snuffy) { Snuffleupagus::AuthToken.new('sup3r4w3s0m3p4ssw0rd') }
+  let(:snuffy) { described_class.new('sup3r4w3s0m3p4ssw0rd') }
 
   describe '#create_token' do
-    subject { snuffy.create_token context: 'my-context' }
+    subject(:create_token) { snuffy.create_token context: 'my-context' }
 
     it { is_expected.to be_a String }
-    it { expect(subject.length).to eq 96 }
+    it { expect(create_token.length).to eq 96 }
     it { is_expected.to match(/\A[a-f0-9]{96}\z/) }
   end
 
   describe '#token_valid?' do
-    subject { snuffy.token_valid?(token: token, context: 'my-context') }
+    subject(:token_valid?) { snuffy.token_valid?(token: token, context: 'my-context') }
 
     context 'with a valid token' do
       let(:token) { snuffy.create_token context: 'my-context' }
@@ -47,31 +47,31 @@ describe Snuffleupagus::AuthToken do
       it { is_expected.to be_falsey }
     end
 
-    context 'testing expired tokens' do
+    context 'with an expired token' do
       let(:token) { snuffy.create_token context: 'my-context' }
 
       before { token } # pre-load the token
       after { Timecop.return }
 
-      context 'just inside the time difference (expired token)' do
+      context 'when just inside the time difference (expired token)' do
         before { Timecop.freeze Time.now - 119 }
 
         it { is_expected.to be_truthy }
       end
 
-      context 'just outside the time difference (expired token)' do
+      context 'when just outside the time difference (expired token)' do
         before { Timecop.freeze Time.now - 120 }
 
         it { is_expected.to be_falsey }
       end
 
-      context 'just inside the time difference (future token)' do
+      context 'when just inside the time difference (future token)' do
         before { Timecop.freeze Time.now + 119 }
 
         it { is_expected.to be_truthy }
       end
 
-      context 'just outside the time difference (future token)' do
+      context 'when just outside the time difference (future token)' do
         before { Timecop.freeze Time.now + 120 }
 
         it { is_expected.to be_falsey }
