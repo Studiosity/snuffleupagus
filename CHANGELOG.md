@@ -3,6 +3,10 @@
 ## Unreleased
 - none
 
+## [0.3.3](releases/tag/v0.3.3) - 2025-01-14
+### Added
+- Add support for Ruby 3.4 (#5)
+
 ## [0.3.2](releases/tag/v0.3.2) - 2024-04-28
 ### Added
 - Add support for Ruby 3.2 and 3.3 (#4)
