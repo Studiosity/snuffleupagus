@@ -3,6 +3,7 @@
 source 'http://rubygems.org'
 gemspec
 
+gem 'ostruct'
 gem 'rake', '~> 12.3', '>= 12.3.3'
 gem 'rspec', '~> 3'
 gem 'rubocop', '~> 1.70'
