@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.description               = 'Simple auth token generator/validator'
   s.summary                   = "snuffleupagus-#{s.version}"
   s.required_rubygems_version = '> 1.3.6'
-  s.required_ruby_version     = ['>= 3.0.0', '< 3.5.0']
+  s.required_ruby_version     = ['>= 3.2.0', '< 4.1.0']
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
   # delete this section to allow pushing this gem to any host.
