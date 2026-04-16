@@ -22,6 +22,10 @@ module Snuffleupagus
   #     #=> true
   #
   class AuthToken
+    CONSTANT = 'date:'
+    MAX_VALID_TIME_DIFFERENCE = 120 # tokens are only valid for 2 minutes
+    private_constant :CONSTANT, :MAX_VALID_TIME_DIFFERENCE
+
     def initialize(key)
       @key = key
       @cipher = OpenSSL::Cipher.new('aes-256-cbc')
@@ -44,9 +48,6 @@ module Snuffleupagus
     end
 
     private
-
-    CONSTANT = 'date:'
-    MAX_VALID_TIME_DIFFERENCE = 120 # tokens are only valid for 2 minutes
 
     attr_reader :cipher
 
